@@ -28,58 +28,23 @@ function getHTMLForAnimal(animal) {
       </div>
       `;
   }
- 
+
   function initAnimalType(animalType) {
-    let button = document.getElementById(`${animalType.name}-link`);
+
+    const id = `${animalType.name}-link`
+    let button = document.getElementById(id);
+
+    let element = document.getElementById("main-content");
 
     button.addEventListener("click", () => {
-
-      let animals = zoo.animals.filter((x) => x.typeId === animalType.id);
-      let animalNames = animals.map(x=>x.name).join(" ");
-      //animals.forEach(x=>animalNames+=`${x.name} `);
-
-      let animalName = window.prompt(`Which ${animalType.name} do you want to see? ${animalNames}`, 'all');
-      let element = document.getElementById("main-content");
- 
-      if (!animalName) {
-        // don't do anything if they clicked Cancel
-        return;
-      }
-
-      if (animalName === 'all') {
+    
         element.innerHTML = getHTMLForAnimalType(animalType);
-      }
-      else {
-        let animal = animals.find(x=>x.name===animalName);
-        if (!animal) {
-          alert("Unknown name entered. Showing all.");
-          element.innerHTML = getHTMLForAnimalType(animalType);
-        }
-        else {
-          element.innerHTML = getHTMLForAnimal(animal);
-        }
-      }
+      
     });
-  }
+}
 
-  function showShowcaseAnimal() {
-    let div = document.getElementById('main-content');
-    let animal = zoo.animals.find(x=>x.showcase);
-    div.innerHTML = getHTMLForAnimal(animal);
-  }
+function initAnimalTypes() {
+  zoo.animalTypes.forEach((x) => initAnimalType(x));
+}
 
-  function initHomeButton() {
-    let button = document.getElementById('home-link');
-    button.addEventListener('click', ()=> {
-      showShowcaseAnimal();
-    });
-  }
-  
-  function initAnimalTypes() {
-    zoo.animalTypes.forEach((x) => initAnimalType(x));
-  }
-
-  showShowcaseAnimal();
-  initAnimalTypes();
-  initHomeButton();
-  
+initAnimalTypes();

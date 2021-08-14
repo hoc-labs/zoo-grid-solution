@@ -4,10 +4,6 @@ body {
   background-color:lightgrey !important;
 }
 
-#form {
-  display:none;
-}
-
 .buttons {
   margin-bottom:20px;
 }
